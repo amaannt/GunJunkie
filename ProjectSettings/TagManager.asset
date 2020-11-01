@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - TargetCube
+  - Walls
+  - targets
+  - Bullet
+  - AccuracyText
+  - Gun
+  - localPlayer
+  - settingsPanel
+  - GunPoint
+  - muzzleflash
+  - myMuzzle
+  - healthText
+  - killfeed
+  - userName
+  - warningSignin
+  - StartGameLauncher
+  - feedPanel
+  - RewardFireRate
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - LocalPlayer
+  - OtherPlayer
+  - Targets
+  - Ground
+  - PostProcessing
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
