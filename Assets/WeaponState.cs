@@ -4,23 +4,62 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class WeaponState : MonoBehaviourPun, IPunObservable
+public class WeaponState : MonoBehaviourPun
 {
+
+
+    public List<GameObject> gunObjects;
     Vector3 originalScale;
     bool isActive;
     // Start is called before the first frame update
     void Start()
     {
-        originalScale = gameObject.transform.localScale;
-        if (gameObject.name.Equals("Ak-47"))
-        {
-            isActive = true;
-        }
+        originalScale = gameObject.transform.position;     
     }
-    
+
     void Update() {
-        if (photonView.IsMine)
-            gameObject.SetActive(isActive);
+       
+        UserInput();
+    }
+
+
+    void UserInput()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (photonView.IsMine){
+
+                photonView.RPC("WeaponActivate", RpcTarget.All, 0);
+
+                photonView.RPC("WeaponDeactivate", RpcTarget.All, 1);
+            }
+           
+        }
+         if(Input.GetKeyDown(KeyCode.Alpha2) )
+        {
+            if (photonView.IsMine)
+            {
+                photonView.RPC("WeaponActivate", RpcTarget.All, 1);
+                photonView.RPC("WeaponDeactivate", RpcTarget.All, 0);
+            }
+        }
+       
+
+
+    }
+
+    [PunRPC]
+    void WeaponActivate(int code) {
+         gunObjects[code].SetActive(true);
+       
+        Debug.Log(gameObject.name + " Activated");
+    }
+
+    [PunRPC]
+    void WeaponDeactivate(int code)
+    {
+        gunObjects[code].SetActive(false);
+        Debug.Log(gameObject.name + " Deactivated");
     }
     public void setStateWeapon(bool isActiveRec,string ID)
     {
@@ -32,8 +71,6 @@ public class WeaponState : MonoBehaviourPun, IPunObservable
     public void gunState(bool isActiveRec,string ID)
     {
 
-
-        
         if (isActive)
         {
 
@@ -45,15 +82,4 @@ public class WeaponState : MonoBehaviourPun, IPunObservable
 
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(isActive);
-        }
-        else if(stream.IsReading)
-        {
-            isActive = (bool)stream.ReceiveNext();
-        }
-    }
 }

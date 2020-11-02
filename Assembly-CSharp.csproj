@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{036A5475-E6E4-6B97-6C96-C5F2E088F329}</ProjectGuid>
+    <ProjectGuid>{846E7D5B-AA2D-E7B0-DB97-BBA2677FC30B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\SpawnerTarget.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\AppSettingsExtensions.cs" />
+    <Compile Include="Assets\WeaponState.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\Scripts\Manager.cs" />
     <Compile Include="Assets\Scripts\PlayersManager.cs" />
@@ -95,7 +96,6 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\Common\OnStartDelete.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Scripts\PlayerStatController.cs" />
-    <Compile Include="Assets\WeaponState.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -755,47 +755,47 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.PhotonPlayer.Editor.csproj">
-      <Project>{A0DBB787-6919-0FF1-A0C6-3AAC77676EB0}</Project>
+      <Project>{9C9235CF-F345-EBDA-4E5F-D941F237CD81}</Project>
       <Name>PhotonUnityNetworking.Utilities.PhotonPlayer.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="PunDemos.DemoHubEditor.csproj">
-      <Project>{DA5912F4-B8BC-3C02-D599-99C71156F8FC}</Project>
+      <Project>{18F371DB-8678-E41A-BC91-F69A3C585C79}</Project>
       <Name>PunDemos.DemoHubEditor</Name>
     </ProjectReference>
     <ProjectReference Include="PunDemos.DemoSlotcarEditor.csproj">
-      <Project>{07CB263D-EA1E-F822-4ED9-EA1A680A58C7}</Project>
+      <Project>{4FE2C6D2-AEE5-465E-91BD-08E114B80DE9}</Project>
       <Name>PunDemos.DemoSlotcarEditor</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Demos.csproj">
-      <Project>{1D419C9C-653E-31C7-BECE-348153197EDB}</Project>
+      <Project>{5A674F5E-18D9-AC7D-793B-4D5ECC8FAAA4}</Project>
       <Name>PhotonUnityNetworking.Demos</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.csproj">
-      <Project>{BEB62602-7D44-C319-6420-DD2C3C91A33A}</Project>
+      <Project>{535580AC-0293-69A6-B9FB-D309814E929E}</Project>
       <Name>PhotonUnityNetworking.Utilities</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonWebSocket.csproj">
-      <Project>{7C0B9B1B-3A6B-BEE5-73FB-37EEFB327D65}</Project>
+      <Project>{193030A1-627C-5953-A811-72B727B77054}</Project>
       <Name>PhotonWebSocket</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonRealtime.csproj">
-      <Project>{AE0B10DA-6BDC-5E68-C51C-1F08D0FA7FE7}</Project>
+      <Project>{0019FB80-70A4-A855-35C5-F18BA5EB3283}</Project>
       <Name>PhotonRealtime</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.csproj">
-      <Project>{E784B0A1-B942-BDD9-2196-23AF14AAE7EE}</Project>
+      <Project>{50BF60BA-D00F-476D-3B7E-AEC1DFDF8B55}</Project>
       <Name>PhotonUnityNetworking</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonChat.csproj">
-      <Project>{CCF4CCC2-0199-F1E0-6AFB-DD291615BCC9}</Project>
+      <Project>{F544A244-9614-28D1-4CC2-B45DB8CDE58E}</Project>
       <Name>PhotonChat</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Utilities.Culling.Editor.csproj">
-      <Project>{5CC4DFD9-7C88-8C5D-D6C8-C5136AFF6EFA}</Project>
+      <Project>{0E682364-6B30-E337-9F5D-827DC647C3DF}</Project>
       <Name>PhotonUnityNetworking.Utilities.Culling.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="PhotonUnityNetworking.Editor.csproj">
-      <Project>{61F62B62-400B-2623-55E2-EA9AB38F0628}</Project>
+      <Project>{7DB873C8-587D-F41A-C1D5-A1A30D35B81B}</Project>
       <Name>PhotonUnityNetworking.Editor</Name>
     </ProjectReference>
   </ItemGroup>

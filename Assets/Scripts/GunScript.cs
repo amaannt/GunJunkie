@@ -13,6 +13,7 @@ public class GunScript : MonoBehaviourPunCallbacks, IPunObservable
     MeshRenderer ActiveGun;
     public List<string> typeOfGuns;
     public List<GameObject> gunObjects;
+    public List<GameObject> PlaceHoldergunObjects;
     int CurrentGunCode;
 
     public float fireRate = 10;
@@ -62,8 +63,11 @@ public class GunScript : MonoBehaviourPunCallbacks, IPunObservable
         //adding guns temporarily like this
         typeOfGuns = new List<string>();
 
-        typeOfGuns.Add("Ak-47");
-        typeOfGuns.Add("rocketLauncher");
+        foreach(GameObject g in gunObjects)
+        {
+            typeOfGuns.Add(g.name);
+            Debug.Log(g.name+ " Loaded");
+        }
         //gunObjects = new List<GameObject>();
 
         //start with rifle (AK47)
@@ -110,7 +114,7 @@ public class GunScript : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     public bool weaponActive = true;
-    #region Shooting Code
+    
     void UserInput() {
 
         if (Input.GetMouseButton(0))
@@ -124,28 +128,52 @@ public class GunScript : MonoBehaviourPunCallbacks, IPunObservable
 
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            TriggerWeaponChange(1,1); //guncode 1(rocketlauncher); fireRate 1
-            weaponActive = true;
-        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            TriggerWeaponChange(0, 10); //guncode 0 (ak47); fireRate 10
-            weaponActive = true;
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            weaponActive = false;
-            //gun activation code TEST<<<<<<<<
-           
-            foreach (GameObject g in gunObjects)
+            if (photonView.IsMine)
             {
-                    g.SetActive(false);
+                TriggerWeaponChange(0, 10); //guncode 0 (ak47); fireRate 10
+                photonView.RPC("WeaponActivate", RpcTarget.All, 0);
+
+                photonView.RPC("WeaponDeactivate", RpcTarget.All, 1);
+            }
+
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (photonView.IsMine)
+            {
+                TriggerWeaponChange(1, 1); //guncode 1(rocketlauncher); fireRate 1
+
+                photonView.RPC("WeaponActivate", RpcTarget.All, 1);
+                photonView.RPC("WeaponDeactivate", RpcTarget.All, 0);
             }
         }
+        //omitted for testing
+        /* if (Input.GetKeyDown(KeyCode.Alpha2))
+         {
+             TriggerWeaponChange(1, 1); //guncode 1(rocketlauncher); fireRate 1
+         }
+         if (Input.GetKeyDown(KeyCode.Alpha1))
+         {
+             TriggerWeaponChange(0, 10); //guncode 0 (ak47); fireRate 10
+         }*/
+
     }
-    
+
+    [PunRPC]
+    void WeaponActivate(int code)
+    {
+        PlaceHoldergunObjects[code].SetActive(true);
+
+    }
+
+    [PunRPC]
+    void WeaponDeactivate(int code)
+    {
+        PlaceHoldergunObjects[code].SetActive(false);
+    }
 
     void TriggerWeaponChange( int code, int rateOfFire)
     {
@@ -154,9 +182,8 @@ public class GunScript : MonoBehaviourPunCallbacks, IPunObservable
         nextTimeToFire = 0f;
 
         CurrentGunCode = code;
-
         GunChangeLocal(CurrentGunCode);
-           // photonView.RPC("GunChange", RpcTarget.All,code);
+        //photonView.RPC("GunChange", RpcTarget.All,code);
 
         Debug.Log("Gun Changed to " + typeOfGuns[CurrentGunCode]);
         // GunChange();
@@ -172,14 +199,15 @@ public class GunScript : MonoBehaviourPunCallbacks, IPunObservable
             if (g.name.Equals(typeOfGuns[gunCode]))
             {
                 //access script inside the gun
-               
-                    g.GetComponent<WeaponState>().setStateWeapon(true,CurrentUser);
+
+                g.SetActive(true);
+
                 
             }
             else
             {
-                
-                    g.GetComponent<WeaponState>().setStateWeapon(false,CurrentUser);
+
+                g.SetActive(false);
 
             }
         }
@@ -200,53 +228,17 @@ public class GunScript : MonoBehaviourPunCallbacks, IPunObservable
                 if (g.name.Equals(typeOfGuns[gunCode]))
                 {
                     g.SetActive(true);
-                    /*//g.GetComponent<AudioSource>().enabled = true;
-                    if (g.name.Equals("Ak-47")) //access ak internal gameobjects to disable
-                    {
-
-                        MeshRenderer[] r = g.GetComponentsInChildren<MeshRenderer>(true);
-                        foreach (MeshRenderer m in r)
-                        {
-
-                            m.enabled = true;
-                        }
-
-                    }
-                    else
-                    {
-
-                        g.GetComponent<MeshRenderer>().enabled = true;
-
-                    }
-                    GunType = g.name;*/
+                    
                 }
                 else
                 {
                     g.SetActive(false);
-                    /* //g.GetComponent<AudioSource>().enabled = false;
-                     if (g.name.Equals("Ak-47")) //access ak internal gameobjects to disable
-                     {
-
-                         MeshRenderer[] r = g.GetComponentsInChildren<MeshRenderer>(true);
-
-                         foreach (MeshRenderer m in r)
-                         {
-                             Debug.Log(m.name);
-                             m.enabled = false;
-                         }
-
-                     }
-                     else
-                     {
-
-                         g.GetComponent<MeshRenderer>().enabled = false;
-
-                     }*/
+                    
                 }
             }
         }
     }
-
+    #region Shooting Code
 
     public GameObject gunPoint;
 

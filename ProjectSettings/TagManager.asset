@@ -23,6 +23,7 @@ TagManager:
   - StartGameLauncher
   - feedPanel
   - RewardFireRate
+  - Backup
   layers:
   - Default
   - TransparentFX
