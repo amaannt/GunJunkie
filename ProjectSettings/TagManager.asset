@@ -24,6 +24,8 @@ TagManager:
   - feedPanel
   - RewardFireRate
   - Backup
+  - GunPointRocket
+  - AI
   layers:
   - Default
   - TransparentFX
