@@ -2,7 +2,7 @@
 using UnityEngine;
 
 using UnityEngine.UI;
-public class SpawnerTarget : MonoBehaviourPun
+public class SpawnerTarget : MonoBehaviourPunCallbacks
 {
     public int NoOfBots = 12;
    
@@ -31,34 +31,71 @@ public class SpawnerTarget : MonoBehaviourPun
     //toggle dummies AI On and Off
     public void DummyAIActivityOff()
     {
-        foreach(GameObject bot in dummies)
-        {
 
-            bot.GetComponent<MoveToGoalAgent>().BotAIActivityOff();
-        }
+        photonView.RPC("BotIntelligenceActivity", RpcTarget.All, false);
     }
     public void DummyAIActivityOn()
     {
-        foreach (GameObject bot in dummies)
-        {
-            bot.GetComponent<MoveToGoalAgent>().BotAIActivityOn();
-        }
+
+        photonView.RPC("BotIntelligenceActivity", RpcTarget.All, true);
     }
 
-    //disable or enable dummies
-    public void DisableBot() {
+    [PunRPC]
+    void BotIntelligenceActivity(bool isSmart)
+    {
         foreach (GameObject bot in dummies)
         {
-            bot.SetActive(false);
+            if (isSmart) {
+
+                bot.GetComponent<MoveToGoalAgent>().BotAIActivityOn();
+            }
+            else
+            {
+                bot.GetComponent<MoveToGoalAgent>().BotAIActivityOff();
+
+            }
         }
+
+
+    }
+    //disable or enable dummies
+    [PunRPC]
+    void BotActivity(bool isExist)
+    {
+        GameObject[] bots = GameObject.FindGameObjectsWithTag("targets");
+        foreach (GameObject bot in bots)
+        {
+            if (isExist)
+            {
+
+                //since disabling them doesnt work well with the program 
+                //(once target disabled it does not enable cuz it can't be seen by game)
+                
+                bot.transform.position = new Vector3(Random.Range(-65, 44), 45, Random.Range(-58, 60));
+                bot.GetComponent<MoveToGoalAgent>().BotAIActivityOn();
+                bot.GetComponent<Rigidbody>().useGravity = (true);
+
+            }
+            else
+            {
+                //so change position to something far away
+                //turn off AI
+                //turn off gravity so they stay there
+
+                bot.gameObject.transform.position = new Vector3(-100000, -10000, -1000);
+                bot.GetComponent<MoveToGoalAgent>().BotAIActivityOff();
+                bot.GetComponent<Rigidbody>().useGravity = (false);
+            }
+        }
+        Debug.Log("Bots Deactivated");
+    }
+    public void DisableBot() {
+        photonView.RPC("BotActivity", RpcTarget.All, false);
     }
     public void EnableBot() {
-        foreach (GameObject bot in dummies)
-        {
-            bot.SetActive(true);
-        }
+        photonView.RPC("BotActivity", RpcTarget.All, true);
     }
-
+    
 
     //disable or enable custom heads
     //change button appearance

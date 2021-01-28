@@ -74,6 +74,7 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
     <Compile Include="Assets\Scripts\Network\SignIn.cs" />
     <Compile Include="Assets\Scripts\Bot\MoveToGoalAgent.cs" />
+    <Compile Include="Assets\Scripts\Bot\DummySettings.cs" />
     <Compile Include="Assets\Scripts\Bot\target.cs" />
     <Compile Include="Assets\Scripts\Weapon_Effects\explosionScript.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RandomDir.cs" />
@@ -104,7 +105,6 @@
     <Compile Include="Assets\WeaponAssets\FireExplosionVFX\Scripts\FxSplash.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStatController.cs" />
-    <Compile Include="Assets\Scripts\Bot\DummySettings.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

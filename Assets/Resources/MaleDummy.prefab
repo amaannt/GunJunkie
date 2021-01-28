@@ -2384,8 +2384,7 @@ MonoBehaviour:
   MaxStep: 1000
   agentSpeed: 8
   player: {fileID: 0}
-  targetTransform: {fileID: 904126268630111026, guid: d2ce44081b709184c8ecc994c1e2f943,
-    type: 3}
+  targetTransform: {fileID: 0}
 --- !u!114 &5835871677178456973
 MonoBehaviour:
   m_ObjectHideFlags: 0

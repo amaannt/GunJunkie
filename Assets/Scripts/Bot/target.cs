@@ -29,8 +29,14 @@ public class target : MonoBehaviourPun
             photonView.RPC("Respawn",RpcTarget.All);
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag == "Bounds")
+        {
+            photonView.RPC("Respawn", RpcTarget.All);
+        }
+    }
 
-    
     [PunRPC]
     void Respawn()
     {

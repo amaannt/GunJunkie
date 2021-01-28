@@ -34,7 +34,8 @@ public class MoveToGoalAgent : Agent
             transform.position += new Vector3(moveX, 0, moveZ) * Time.deltaTime * moveSpeed;
         }
         try {
-            transform.LookAt(player.transform);
+            //look at player 
+            transform.LookAt(new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z));
         }
         catch
         {
@@ -60,9 +61,9 @@ public class MoveToGoalAgent : Agent
     }
         
 
-    private void OnTriggerEnter(Collider other)
+   /* private void OnTriggerEnter(Collider other)
     {
-       /* if (other.TryGetComponent<Goal>(out Goal goal))
+       *//* if (other.TryGetComponent<Goal>(out Goal goal))
         {
             SetReward(1f );
 
@@ -74,6 +75,6 @@ public class MoveToGoalAgent : Agent
             SetReward(-1f);
             floorMeshRenderer.material = loseMaterial;
             EndEpisode();
-        }*/
-    }
+        }*//*
+    }*/
 }

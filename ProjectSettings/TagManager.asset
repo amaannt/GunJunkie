@@ -26,6 +26,7 @@ TagManager:
   - Backup
   - GunPointRocket
   - AI
+  - Bounds
   layers:
   - Default
   - TransparentFX
